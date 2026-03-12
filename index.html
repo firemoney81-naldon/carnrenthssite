@@ -1,23 +1,550 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- JSON-LD Structured Data for Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "장기/단기 자동차 렌탈 서비스",
+      "serviceType": "자동차 렌탈 및 장기 리스",
+      "provider": {
+        "@type": "Organization",
+        "name": "대한민국 자동차 렌탈 전문 업체",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "대한민국"
+      },
+      "description": "2026년 최신 모델별 장기렌트카 가격 비교 및 견적 서비스입니다. 국산차와 수입차, 신규 가입 혜택, 장단점 분석 등 모든 정보를 한눈에 제공합니다. 장기렌트 비용 절약을 위한 맞춤형 상담을 지금 바로 신청하세요.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "장기렌트카 모델별 견적",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "현대 아반떼 장기렌트"
+            },
+            "price": "300000",
+            "priceCurrency": "KRW",
+            "description": "경차/준중형 대표 모델, 저렴한 가격으로 신차 이용 가능"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "기아 쏘렌토 장기렌트"
+            },
+            "price": "550000",
+            "priceCurrency": "KRW",
+            "description": "가장 인기 있는 SUV 모델, 패밀리카로 추천"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "제네시스 GV70/GV80 장기렌트"
+            },
+            "price": "800000",
+            "priceCurrency": "KRW",
+            "description": "프리미엄 세단 및 SUV 모델, 품격 있는 장기렌트"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "BMW 5시리즈 장기렌트"
+            },
+            "price": "1200000",
+            "priceCurrency": "KRW",
+            "description": "수입차 대표 모델, 품격과 성능을 동시에"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts: Noto Sans KR for readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS for improved design -->
+    <style>
+      :root {
+        --primary-color: #3f51b5; /* Soft Blue */
+        --secondary-color: #f44336; /* Soft Red for CTA */
+        --background-light: #f7f9fc; /* Light background */
+        --background-white: #ffffff;
+        --text-color: #333333;
+        --light-text-color: #606060;
+        --border-color: #e0e0e0;
+        --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+        --radius: 8px;
+      }
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8;
+        background-color: var(--background-light);
+        color: var(--text-color);
+      }
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: var(--shadow-light);
+      }
+      header h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 1rem 0 0;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+        padding-bottom: 5px;
+        position: relative;
+      }
+      nav a:hover, nav a:focus {
+        color: #ffc107;
+        transform: translateY(-2px);
+      }
+      nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #ffc107;
+        transition: width 0.3s ease;
+      }
+      nav a:hover::after, nav a:focus::after {
+        width: 100%;
+      }
+      main {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      section {
+        background-color: var(--background-white);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-light);
+      }
+      h2, h3, h4 {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 1rem;
+        margin-top: 0;
+      }
+      h2 { font-size: 1.8rem; }
+      h3 { font-size: 1.5rem; color: #00796b; border-bottom: 1px dashed #cfd8dc; }
+      h4 { font-size: 1.2rem; }
+      p { margin-bottom: 1.5rem; }
+      strong { font-weight: 700; color: #d32f2f; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      th, td {
+        padding: 1rem;
+        border: 1px solid var(--border-color);
+      }
+      th {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 700;
+      }
+      tbody tr:nth-child(even) { background-color: #f1f3f8; }
+      .cta-button {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        font-weight: 700;
+        padding: 1.2rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        margin: 1rem auto;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        width: auto;
+        border: none;
+        cursor: pointer;
+      }
+      .cta-button:hover {
+        background-color: #e53935;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+      .keyword-tags {
+        margin: 2rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .keyword-tags a {
+        background-color: #e8eaf6;
+        color: var(--primary-color);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        border: 1px solid var(--primary-color);
+      }
+      .keyword-tags a:hover {
+        background-color: #c5cae9;
+      }
+      .review-card {
+        background-color: #e3f2fd;
+        border-left: 5px solid var(--primary-color);
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: var(--radius);
+      }
+      .faq-list {
+        list-style: none;
+        padding: 0;
+      }
+      .faq-item {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .faq-question {
+        font-weight: 700;
+        cursor: pointer;
+        color: var(--primary-color);
+        padding: 1rem 0;
+        position: relative;
+        font-size: 1.1rem;
+      }
+      .faq-answer {
+        background-color: #fafafa;
+        padding: 1rem 1rem 1rem 1.5rem;
+        border-left: 3px solid #b3e5fc;
+        display: none;
+      }
+      .faq-question.active + .faq-answer {
+        display: block;
+      }
+      .faq-question::after {
+        content: '+';
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+      }
+      .faq-question.active::after {
+        content: '-';
+        transform: translateY(-50%) rotate(0deg);
+      }
+      .feature-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 1.5rem;
+      }
+      .feature-item {
+        flex: 1;
+        min-width: 280px;
+        background-color: #e8eaf6;
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .form-group input, .form-group select, .form-group textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        box-sizing: border-box;
+      }
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: var(--light-text-color);
+        background-color: var(--background-white);
+        margin-top: 2rem;
+        border-top: 1px solid var(--border-color);
+      }
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        nav ul { flex-direction: column; gap: 1rem; }
+        nav li { width: 100%; text-align: center; }
+        .feature-item { min-width: 100%; }
+        header h1 { font-size: 1.5rem; }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>2026년 장기렌트카 가격 비교 및 견적 전문 업체</h1>
+        <p>신차 장기렌탈, 합리적인 비용으로 당신의 드림카를 만나보세요.</p>
+        <nav>
+            <ul>
+                <li><a href="#introduction">서비스 소개</a></li>
+                <li><a href="#comparison">가격 비교 및 장단점</a></li>
+                <li><a href="#models">추천 모델별 견적</a></li>
+                <li><a href="#reviews">실제 후기 및 FAQ</a></li>
+                <li><a href="#contact">무료 견적 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- Section 1: Introduction -->
+        <section id="introduction">
+            <h2>장기렌트카, 왜 선택해야 할까요?</h2>
+            <p><strong>2026년형 신차를 가장 합리적인 방법으로 만나는 솔루션</strong>, 바로 <strong>장기렌트카</strong>입니다. 자동차 구매 방식은 복잡하고 어렵지만, 장기렌트는 초기 비용 부담 없이 원하는 기간 동안 신차를 운행할 수 있는 매력적인 대안으로 자리 잡았습니다. 단순히 자동차를 빌리는 개념을 넘어, 취득세, 등록세, 자동차세, 보험료 등 복잡한 부대 비용과 세금 처리를 렌탈료에 모두 포함하여 <mark>고객님의 시간과 비용을 획기적으로 절약</mark>해 드립니다. 특히 사업자의 경우 월 렌탈료 전액을 비용 처리할 수 있어 절세 효과가 탁월합니다. 본 페이지에서는 <strong>장기렌트카 전문 업체</strong>로서 고객님께 가장 <strong>저렴한 곳</strong>을 비교하고 추천해 드리며, <strong>장단점</strong> 분석과 <strong>신규 가입 혜택</strong> 정보를 제공합니다.</p>
+
+            <div class="keyword-tags" aria-label="주요 키워드 태그">
+                <a href="#comparison">장기렌트카 비용 견적</a>
+                <a href="#models">2026년 장기렌트카 추천</a>
+                <a href="#comparison">장기렌트 장단점 비교</a>
+                <a href="#models">현대 쏘나타 장기렌트 가격</a>
+                <a href="#models">기아 카니발 장기렌트 싼곳</a>
+                <a href="#reviews">장기렌트카 내돈내산 후기</a>
+                <a href="#contact">장기렌트카 신규 가입 혜택</a>
+                <a href="#models">수입차 장기렌트 전문</a>
+            </div>
+        </section>
+
+        <!-- Section 2: Comparison (Long-term Lease vs. Purchase vs. Loan) -->
+        <section id="comparison">
+            <h2>장기렌트카 장단점 상세 비교: 구매 vs. 할부 vs. 렌탈</h2>
+            <p>차량 운용 방식에는 여러 가지가 있습니다. 단순 구매(현금 일시불), 할부(대출), 그리고 장기렌트/리스가 대표적입니다. <strong>장기렌트 장점</strong>을 극대화하기 위해서는 본인의 상황에 맞는 최적의 방법을 선택하는 것이 중요합니다. 아래 표를 통해 각 방법의 <strong>장단점</strong>과 <strong>차이점</strong>을 명확히 비교해 보고, 왜 많은 분들이 장기렌트를 선택하는지 확인해 보세요.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>장기렌트카 (렌탈)</th>
+                        <th>자동차 구매 (할부/현금)</th>
+                        <th>자동차 리스 (금융리스)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>초기 비용</strong></td>
+                        <td><strong>0원 가능</strong> (보증금/선납금 선택)</td>
+                        <td>취득세, 등록세, 보험료 등 목돈 지출</td>
+                        <td>보증금/선납금 필요 (렌트와 유사)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>보험 처리</strong></td>
+                        <td>렌탈사 보험 가입 (보험료 상승 무관)</td>
+                        <td>개인 보험 가입 (사고 시 보험료 할증)</td>
+                        <td>개인 보험 가입 (사고 시 보험료 할증)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>정비 및 관리</strong></td>
+                        <td>정비 상품 선택 시 모든 관리 대행</td>
+                        <td>개인이 직접 관리 및 정비 책임</td>
+                        <td>정비 상품 선택 가능 (렌트보다 적음)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>세금 처리</strong></td>
+                        <td>렌탈료 전액 손비 처리 가능 (사업자)</td>
+                        <td>감가상각비, 유류비 등 복잡한 처리</td>
+                        <td>렌탈료 전액 손비 처리 가능 (사업자)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>번호판</strong></td>
+                        <td>'하', '호' 번호판 사용</td>
+                        <td>일반 번호판 사용</td>
+                        <td>일반 번호판 사용</td>
+                    </tr>
+                    <tr>
+                        <td><strong>만기 처리</strong></td>
+                        <td>인수, 반납, 재렌탈 선택 가능</td>
+                        <td>자차 소유 (매각 시 손해 감수)</td>
+                        <td>인수, 반납 선택 가능</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>장기렌트 단점</strong> 중 가장 많이 거론되는 '하', '호' 번호판에 대한 거부감은 최근 많이 줄어들었으며, 특히 <strong>사업자</strong> 고객에게는 세금 절감 효과가 커서 이 단점을 상쇄하고도 남는 <strong>장기렌트 장점</strong>이 있습니다. <strong>장기렌트카 가격</strong>은 여러 렌탈사 비교를 통해 최저가를 찾는 것이 핵심이며, 저희 <strong>장기렌트 전문 업체</strong>에서 정확한 견적을 제공해 드립니다. <mark>2026년 기준, 렌터카 시장은 신차 출고 지연 문제로 인해 재고 확보가 경쟁력을 좌우</mark>하고 있습니다. 저희는 즉시 출고 가능한 인기 모델 재고를 다수 확보하고 있습니다.</p>
+        </section>
+
+        <!-- Section 3: Recommended Models and Pricing Guide -->
+        <section id="models">
+            <h2>인기 모델별 장기렌트카 예상 견적 및 순위 (2026년 기준)</h2>
+            <p>고객님들이 가장 많이 찾는 <strong>장기렌트카 추천</strong> 모델의 <strong>평균 비용</strong>을 안내해 드립니다. <strong>장기렌트 가격</strong>은 계약 기간(36개월/48개월/60개월), 초기 보증금 유무, 정비 옵션에 따라 달라집니다. 아래 표의 <strong>예상 금액</strong>은 참고용이며, 정확한 <strong>할인</strong> 및 <strong>신규 가입 혜택</strong>이 적용된 <strong>견적</strong>은 상담을 통해 확인하실 수 있습니다.</p>
+
+            <h3>1. 국산차 인기 모델 장기렌트 가격 비교</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>차종</th>
+                        <th>평균 월 렌탈료 (48개월 기준)</th>
+                        <th>주요 장점 및 추천 대상</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>현대 아반떼</strong></td>
+                        <td>30만원대 초반부터</td>
+                        <td><strong>사회 초년생, 대학생 장기렌트 추천</strong>. 저렴한 비용으로 신차 운행, 우수한 연비.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>기아 K5/현대 쏘나타</strong></td>
+                        <td>40만원대 중반부터</td>
+                        <td><strong>가성비 중형 세단</strong>. 넓은 실내 공간, 무난한 디자인과 성능으로 <strong>패밀리카</strong>로 인기.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>기아 쏘렌토/현대 싼타페</strong></td>
+                        <td>50만원대 후반부터</td>
+                        <td><strong>가장 많이 찾는 SUV</strong>. 넉넉한 적재 공간과 실용성, <strong>캠핑 및 레저 활동</strong>에 최적.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>제네시스 GV70/GV80</strong></td>
+                        <td>80만원대 후반부터</td>
+                        <td><strong>프리미엄 세단/SUV</strong>. 고급스러운 승차감과 디자인, <strong>사업자 임원 차량</strong>으로 인기.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>기아 카니발</strong></td>
+                        <td>60만원대 초반부터</td>
+                        <td><strong>다자녀 가족, 의전용 차량 추천</strong>. 9인승으로 고속도로 버스 전용차로 이용 가능.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>장기렌트카 순위</strong>를 매길 때 중요한 요소 중 하나는 초기 비용의 절감입니다. <strong>선납금</strong>은 렌탈료의 일부를 미리 내는 방식이고, <strong>보증금</strong>은 계약 만기 시 돌려받는 담보금입니다. <strong>저렴한 곳</strong>을 찾을 때는 월 렌탈료와 함께 이러한 초기 비용을 고려하여 총 지출 <strong>금액</strong>을 비교해야 합니다. 저희는 고객의 신용도에 따라 보증금 없이 진행하는 <strong>무보증 장기렌트</strong>도 가능합니다.</p>
+
+            <h3>2. 수입차 장기렌트카: 저렴하게 이용하는 방법</h3>
+            <p>수입차를 <strong>장기렌트</strong>로 이용하면 높은 감가상각비 걱정 없이 신차를 경험할 수 있습니다. <strong>BMW 5시리즈</strong>나 <strong>벤츠 E-클래스</strong> 같은 인기 모델은 <strong>장기렌트</strong>를 통해 구매보다 훨씬 <strong>저렴한 가격</strong>으로 이용 가능합니다. 특히 <strong>테슬라 모델3, 모델Y</strong> 등 전기차 렌트는 <strong>전기차 보조금</strong> 혜택이 렌탈료에 반영되어 있어 <strong>신규 가입 혜택</strong>이 뛰어납니다. <strong>장기렌트 전문 업체</strong>를 통해 견적을 받으면 <strong>프로모션 할인</strong>을 적용받아 <strong>평균</strong> 시세보다 <strong>싼곳</strong>을 찾을 수 있습니다.</p>
+
+            <!-- Example of External Links -->
+            <h4>장기렌트 관련 외부 신뢰 정보</h4>
+            <ul>
+                <li>자동차 리스/렌탈 산업 동향 (한국자동차산업협회): <a href="https://www.kama.or.kr/" target="_blank">KAMA 공식 웹사이트</a></li>
+                <li>자동차 등록 대수 현황 (국토교통부): <a href="https://www.molit.go.kr/" target="_blank">국토교통부 통계 자료</a></li>
+                <li>자동차 관리법 및 소비자 보호 규정 (법제처): <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=185361" target="_blank">자동차 관리법</a></li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Customer Reviews and FAQ -->
+        <section id="reviews">
+            <h2>고객 후기 및 자주 묻는 질문 (FAQ)</h2>
+            <p><strong>장기렌트카 내돈내산 후기</strong>를 통해 실제 고객들의 경험을 확인해 보세요. 저희 <strong>장기렌트 전문 업체</strong>는 투명한 <strong>가격</strong> 공개와 꼼꼼한 서비스로 높은 <strong>순위</strong> 평가를 받고 있습니다. 특히 <strong>장기렌트 비용</strong>과 관련된 궁금증을 해소하기 위해 <strong>FAQ</strong>를 정리했습니다.</p>
+
+            <div class="review-card">
+                <p><strong>[후기]</strong> 장기렌트가 처음이라 <strong>비교</strong>하고 <strong>견적</strong> 받는 과정이 복잡할까 걱정했습니다. 하지만 담당자님이 <strong>장단점</strong>을 명확하게 설명해주시고 <strong>가장 저렴한 곳</strong>을 찾아주셨어요. 특히 <strong>2026년 신차</strong>를 빨리 받고 싶었는데, 즉시 출고 재고를 확보해 주셔서 감사했습니다. <strong>장기렌트카 추천</strong>합니다! - <span>서울시 강남구, 직장인 김○○ 고객님</span></p>
+            </div>
+            <div class="review-card">
+                <p><strong>[후기]</strong> <strong>사업자</strong>라서 <strong>세금</strong> 처리가 중요했는데, <strong>장기렌트 비용</strong> 전액을 손비 처리할 수 있어서 좋았습니다. <strong>벤츠 E클래스</strong>를 <strong>할인</strong>받아 저렴하게 이용하고 있어요. <strong>신규 가입 혜택</strong>으로 <strong>사은품</strong>까지 받아서 만족도가 높습니다. - <span>경기도 성남시, 법인 대표 박○○ 고객님</span></p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">자주 묻는 질문 (FAQ)</h3>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false" role="button">Q. 장기렌트카 비용은 어떻게 결정되나요?</div>
+                    <div class="faq-answer">장기렌트 비용은 차량 모델, 옵션, 계약 기간, 초기 보증금/선납금 여부, 연간 주행거리, 정비 서비스 포함 여부 등 여러 요소에 따라 달라집니다. 특히 렌탈사마다 금리나 프로모션 할인율이 다르기 때문에 여러 <strong>장기렌트 전문 업체</strong>를 <strong>비교</strong>하는 것이 중요합니다. 저희는 고객님의 조건에 맞는 최적의 <strong>장기렌트 가격</strong>을 찾아드립니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false" role="button">Q. 신용 등급이 낮아도 장기렌트 가입이 가능한가요?</div>
+                    <div class="faq-answer">일반적으로 장기렌트 <strong>가입</strong> 시 신용 심사를 거치지만, <strong>저신용 장기렌트</strong> 상품을 제공하는 업체도 있습니다. 신용 등급이 낮을 경우 보증금이나 선납금을 납부하여 심사를 통과할 확률을 높일 수 있습니다. <strong>신규 가입</strong>을 원하는 고객님께 맞춤형 상담을 제공합니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" tabindex="0" aria-expanded="false" role="button">Q. 장기렌트 만기 시 인수와 반납 중 어떤 것이 유리한가요?</div>
+                    <div class="faq-answer">인수 또는 반납의 유리함은 계약 당시의 잔존가치와 만기 시점의 중고차 시세에 따라 달라집니다. 잔존가치보다 중고차 시세가 높으면 인수가 유리하고, 낮으면 반납이 유리합니다. <strong>장기렌트 장단점</strong>을 고려하여 계약 만기 전 충분히 비교 분석해 드립니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Quote Request Form (Engagement) -->
+        <section id="contact">
+            <h2>무료 견적 상담 신청</h2>
+            <p><strong>장기렌트카 견적</strong>을 받고 싶으신가요? 지금 바로 신청하세요. <strong>2026년 최신 모델</strong>의 <strong>장기렌트 가격 비교</strong>는 물론, 고객님께 가장 유리한 <strong>신규 가입 혜택</strong>과 <strong>할인</strong> 정보를 제공해 드립니다. 복잡한 <strong>장기렌트 비용</strong> 계산, 이제 전문가에게 맡기시고 가장 <strong>저렴한 곳</strong>을 선택하세요.</p>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" required placeholder="이름을 입력해주세요">
+                </div>
+                <div class="form-group">
+                    <label for="phone">연락처:</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="예: 010-1234-5678">
+                </div>
+                <div class="form-group">
+                    <label for="model">희망 차종:</label>
+                    <select id="model" name="model">
+                        <option value="">차종을 선택해주세요</option>
+                        <option value="avante">현대 아반떼</option>
+                        <option value="sonata">현대 쏘나타</option>
+                        <option value="santafe">현대 싼타페</option>
+                        <option value="g70">제네시스 G70</option>
+                        <option value="g80">제네시스 G80</option>
+                        <option value="k5">기아 K5</option>
+                        <option value="sorento">기아 쏘렌토</option>
+                        <option value="carnival">기아 카니발</option>
+                        <option value="tesla_model3">테슬라 모델3</option>
+                        <option value="bmw5">BMW 5시리즈</option>
+                        <option value="mercedese">벤츠 E클래스</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="options">상세 요청 사항:</label>
+                    <textarea id="options" name="options" rows="4" placeholder="계약 기간(48개월/60개월), 보증금/선납금 여부, 정비 옵션 등을 남겨주세요."></textarea>
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="cta-button" aria-label="장기렌트 견적 상담 신청">무료 견적 신청하기</button>
+                </div>
+            </form>
+        </section>
     </main>
-  </body>
-</html>
+
+    <!-- JavaScript for FAQ Accordion -->
+    <script>
+      document.querySelectorAll('.faq-question').forEach((question) => {
+        question.addEventListener('click', () => {
+          const answer = question.nextElementSibling;
+          const isExpanded = question.getAttribute('aria-expanded') === 'true';
+
+          question.setAttribute('aria-expanded', !isExpanded);
+          question.classList.toggle('active');
+
+          if (isExpanded) {
+            answer.style.display = 'none';
+          } else {
+            answer.style.display = 'block';
+          }
+        });
+      });
+    </script>
+
+  
